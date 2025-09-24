@@ -1,3 +1,7 @@
+*{
+    text-align: center;
+}
+
 canvas {
     background-color: lightgrey;
     border: 2px solid black;
