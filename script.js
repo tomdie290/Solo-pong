@@ -32,24 +32,24 @@ boutonPause.addEventListener('click', () => {
         if (!partieFinie) dessiner();
     }
 });
-document.querySelector('.fa-arrow-left').addEventListener('mousedown', () => {
+document.querySelector('.fa-arrow-left').addEventListener('touchstart', () => {
     gaucheAppuyee = true;
     if (partieFinie) {
         reinitialiserPartie();
         dessiner();
     }
 });
-document.querySelector('.fa-arrow-right').addEventListener('mousedown', () => {
+document.querySelector('.fa-arrow-right').addEventListener('touchstart', () => {
     droiteAppuyee = true;
     if (partieFinie) {
         reinitialiserPartie();
         dessiner();
     }
 });
-document.querySelector('.fa-arrow-left').addEventListener('mouseup', () => {
+document.querySelector('.fa-arrow-left').addEventListener('touchend', () => {
     gaucheAppuyee = false;
 });
-document.querySelector('.fa-arrow-right').addEventListener('mouseup', () => {
+document.querySelector('.fa-arrow-right').addEventListener('touchend', () => {
     droiteAppuyee = false;
 });
 // Gestion des touches

@@ -18,14 +18,14 @@ h4{
 
 .fa-arrow-left{
 
-    margin-right: 100px;
-    font-size: 100px;
+    margin-right: 40px;
+    font-size: 80px;
     color: darkblue;
 }
 
 .fa-arrow-right{
-    margin-right: 100px;
-    font-size: 100px;
+    margin-right: 40px;
+    font-size: 80px;
     color: darkblue;
 }
 
@@ -49,5 +49,6 @@ h4{
 @media (pointer: fine) {
     .arrow {
         display: none;
+        text-align : center;
     }
 }
