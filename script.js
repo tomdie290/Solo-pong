@@ -146,10 +146,8 @@ function verifierCollisionRaquette() {
                 ballSpeedX = ((ballX - paddleX - paddleWidth/2)/sideSpeedDivider);
             }
         }
-        ballSpeedX = ballSpeedX*1.3;
-        ballSpeedY = ballSpeedY*1.3;
-        console.log(ballSpeedX, ballSpeedY);
-
+        ballSpeedX = ballSpeedX+1.1;
+        ballSpeedY = ballSpeedY*1.1;
     }
 }
 

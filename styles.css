@@ -18,20 +18,19 @@ h4{
 
 .fa-arrow-left{
 
-    margin-right: 40px;
-    font-size: 80px;
+    margin-right: 50px;
+    font-size: 80px; 
+    text-align : center;
     color: darkblue;
 }
 
 .fa-arrow-right{
-    margin-right: 40px;
+    margin-right: 50px;
     font-size: 80px;
+    text-align : center;
     color: darkblue;
 }
-
-.arrow{
-    text-align : center;
-}
+   
 
 #pauseBtn {
     width: 120px;
