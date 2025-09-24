@@ -32,6 +32,8 @@ boutonPause.addEventListener('click', () => {
         if (!partieFinie) dessiner();
     }
 });
+
+// Touches tactiles
 document.querySelector('.fa-arrow-left').addEventListener('touchstart', () => {
     gaucheAppuyee = true;
     if (partieFinie) {
@@ -52,7 +54,8 @@ document.querySelector('.fa-arrow-left').addEventListener('touchend', () => {
 document.querySelector('.fa-arrow-right').addEventListener('touchend', () => {
     droiteAppuyee = false;
 });
-// Gestion des touches
+
+// Gestion des touches clavier
 document.addEventListener('keydown', (e) => {
    if (e.key === 'p' || e.key === 'P') {
         pause = !pause;
@@ -121,12 +124,12 @@ function verifierCollisionMur() {
     if (ballX - ballRadius < 0 || ballX + ballRadius > canvas.width) ballSpeedX *= -1;
 }
 
-// Collision avec la raquette
+// Collision avec la raquette (corrigée avec ballRadius)
 function verifierCollisionRaquette() {
     if (
         ballY + ballRadius > paddleY &&
-        ballX > paddleX &&
-        ballX < paddleX + paddleWidth
+        ballX + ballRadius > paddleX &&
+        ballX - ballRadius < paddleX + paddleWidth
     ) {
         ballSpeedY *= -1;
         ballSpeedX *= 1.10;
@@ -144,7 +147,7 @@ function verifierDefaite() {
     return false;
 }
 
-// Réinitialise la partie
+// Réinitialise la partie (corrigée : reset touches)
 function reinitialiserPartie() {
     paddleX = canvas.width / 2 - paddleWidth / 2;
     paddleY = canvas.height - paddleHeight - 10;
@@ -157,6 +160,10 @@ function reinitialiserPartie() {
     debutPartie = Date.now();
     tempsPauseTotal = 0;
     partieFinie = false;
+
+    // 🔑 On réinitialise aussi les contrôles
+    gaucheAppuyee = false;
+    droiteAppuyee = false;
 }
 
 // Boucle principale
