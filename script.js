@@ -1,26 +1,35 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('canvas'); // Récupère le canvas HTML
+const ctx = canvas.getContext('2d'); // Contexte 2D pour dessiner sur le canvas
 
-canvas.width = 400;
-canvas.height = 500;
+canvas.width = 350;   // Largeur du canvas (aire de jeu)
+canvas.height = 500;  // Hauteur du canvas (aire de jeu)
 
-const paddleWidth = 100, paddleHeight = 10;
-let paddleX = canvas.width / 2 - paddleWidth / 2;
-let paddleY = canvas.height - paddleHeight - 10;
-const paddleSpeed = 6;
+// --- Raquette ---
+const paddleWidth = 100;    // Largeur de la raquette
+const paddleHeight = 10;    // Hauteur de la raquette
+let paddleX = canvas.width / 2 - paddleWidth / 2; // Position X de la raquette (centrée au départ)
+let paddleY = canvas.height - paddleHeight - 10;  // Position Y de la raquette (proche du bas)
+const paddleSpeed = 7;      // Vitesse de déplacement de la raquette
 
-let ballX = canvas.width / 2, ballY = canvas.height / 2;
-let ballRadius = 10;
-let ballSpeedX = 4, ballSpeedY = 4;
-let debutPartie = Date.now();
+// --- Balle ---
+let ballX = canvas.width / 2; // Position X de la balle (centrée au départ)
+let ballY = canvas.height / 2; // Position Y de la balle (milieu de l’écran)
+let ballRadius = 10;           // Rayon de la balle
+let ballSpeedX = 8;            // Vitesse horizontale initiale de la balle
+let ballSpeedY = 8;            // Vitesse verticale initiale de la balle
+let debutPartie = Date.now();  // Moment où la partie a commencé (pour le score)
 
-let gaucheAppuyee = false, droiteAppuyee = false;
-let partieFinie = false;
-let pause = false;
-let pauseDebut = 0;
-let tempsPauseTotal = 0;
+// --- État du jeu ---
+let gaucheAppuyee = false;   // Indique si la flèche gauche est pressée
+let droiteAppuyee = false;   // Indique si la flèche droite est pressée
+let partieFinie = false;     // Indique si la partie est terminée
+let pause = false;           // Indique si le jeu est en pause
+let pauseDebut = 0;          // Moment où la pause a commencé
+let tempsPauseTotal = 0;     // Temps total passé en pause (pour corriger le score)
 
-let sideSpeedDivider = 10; 
+// --- Paramètre du rebond latéral ---
+let sideSpeedDivider = 10;   // Diviseur pour calculer la vitesse horizontale en fonction de l’endroit où la balle touche la raquette
+
 
 const boutonPause = document.getElementById('pauseBtn');
 boutonPause.addEventListener('click', () => {
@@ -131,12 +140,16 @@ function verifierCollisionRaquette() {
         if (ballX > paddleX && ballX < paddleX + paddleWidth) {
             ballSpeedY = -ballSpeedY;
             if(ballSpeedX > 0) {
-                ballSpeedX = (ballX - paddleX - paddleWidth/2)/sideSpeedDivider;
+                ballSpeedX = ((ballX - paddleX - paddleWidth/2)/sideSpeedDivider);
             }
             else {
-                ballSpeedX = (ballX - paddleX - paddleWidth/2)/sideSpeedDivider;
+                ballSpeedX = ((ballX - paddleX - paddleWidth/2)/sideSpeedDivider);
             }
         }
+        ballSpeedX = ballSpeedX*1.3;
+        ballSpeedY = ballSpeedY*1.3;
+        console.log(ballSpeedX, ballSpeedY);
+
     }
 }
 
@@ -157,11 +170,12 @@ function reinitialiserPartie() {
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
     let angle = Math.random() * Math.PI / 2 + Math.PI / 4; 
-    let vitesse = 4;
+    let vitesse = 3;
     ballSpeedX = vitesse * Math.cos(angle) * (Math.random() < 0.5 ? 1 : -1);
     ballSpeedY = -vitesse * Math.sin(angle); 
     debutPartie = Date.now();
     tempsPauseTotal = 0;
+    
     partieFinie = false;
 
     gaucheAppuyee = false;
