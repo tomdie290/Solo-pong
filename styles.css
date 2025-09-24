@@ -65,7 +65,7 @@ h4{
 }
 
 @media (pointer: fine) {
-    .arrow {
+    .fa-arrow-right, .fa-arrow-left {
         display: none;
         text-align : center;
     }
