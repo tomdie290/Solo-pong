@@ -1,10 +1,10 @@
 canvas {
     background-color: lightgrey;
     border: 2px solid black;
-    width: 90vw;
-    max-width: 800px;
-    height: 65vh;
-    max-height: 580px;
+    width: 800px;
+    max-width: 400px;
+    height: 580px;
+    max-height: 1000px;
     display: block;
     margin: 0 auto;
 }
