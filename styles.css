@@ -1,9 +1,9 @@
 canvas {
     background-color: lightgrey;
     border: 2px solid black;
-    width: 800px;
+    width: 580px;
     max-width: 400px;
-    height: 580px;
+    height: 800px;
     max-height: 1000px;
     display: block;
     margin: 0 auto;
