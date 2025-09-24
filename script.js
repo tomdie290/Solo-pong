@@ -2,10 +2,10 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 // Taille fixe
-canvas.width = 580;
-canvas.height = 650;
+canvas.width = 400;
+canvas.height = 500;
 
-const paddleWidth = 200, paddleHeight = 10;
+const paddleWidth = 100, paddleHeight = 10;
 let paddleX = canvas.width / 2 - paddleWidth / 2;
 let paddleY = canvas.height - paddleHeight - 10;
 const paddleSpeed = 7;
