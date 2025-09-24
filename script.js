@@ -1,14 +1,13 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// Taille fixe
 canvas.width = 400;
 canvas.height = 500;
 
 const paddleWidth = 100, paddleHeight = 10;
 let paddleX = canvas.width / 2 - paddleWidth / 2;
 let paddleY = canvas.height - paddleHeight - 10;
-const paddleSpeed = 7;
+const paddleSpeed = 6;
 
 let ballX = canvas.width / 2, ballY = canvas.height / 2;
 let ballRadius = 10;
@@ -20,6 +19,8 @@ let partieFinie = false;
 let pause = false;
 let pauseDebut = 0;
 let tempsPauseTotal = 0;
+
+let sideSpeedDivider = 10; 
 
 const boutonPause = document.getElementById('pauseBtn');
 boutonPause.addEventListener('click', () => {
@@ -124,16 +125,18 @@ function verifierCollisionMur() {
     if (ballX - ballRadius < 0 || ballX + ballRadius > canvas.width) ballSpeedX *= -1;
 }
 
-// Collision avec la raquette (corrigée avec ballRadius)
+// Collision avec la raquette 
 function verifierCollisionRaquette() {
-    if (
-        ballY + ballRadius > paddleY &&
-        ballX + ballRadius > paddleX &&
-        ballX - ballRadius < paddleX + paddleWidth
-    ) {
-        ballSpeedY *= -1;
-        ballSpeedX *= 1.10;
-        ballSpeedY *= 1.10;
+    if (ballY + ballRadius > canvas.height - paddleHeight - 10) {
+        if (ballX > paddleX && ballX < paddleX + paddleWidth) {
+            ballSpeedY = -ballSpeedY;
+            if(ballSpeedX > 0) {
+                ballSpeedX = (ballX - paddleX - paddleWidth/2)/sideSpeedDivider;
+            }
+            else {
+                ballSpeedX = (ballX - paddleX - paddleWidth/2)/sideSpeedDivider;
+            }
+        }
     }
 }
 
@@ -147,7 +150,7 @@ function verifierDefaite() {
     return false;
 }
 
-// Réinitialise la partie (corrigée : reset touches)
+// Réinitialise la partie 
 function reinitialiserPartie() {
     paddleX = canvas.width / 2 - paddleWidth / 2;
     paddleY = canvas.height - paddleHeight - 10;
@@ -161,7 +164,6 @@ function reinitialiserPartie() {
     tempsPauseTotal = 0;
     partieFinie = false;
 
-    // 🔑 On réinitialise aussi les contrôles
     gaucheAppuyee = false;
     droiteAppuyee = false;
 }
