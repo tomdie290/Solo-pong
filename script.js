@@ -65,9 +65,11 @@ document.querySelector('.fa-arrow-right').addEventListener('touchend', () => {
     droiteAppuyee = false;
 });
 const boutonRecommencer = document.getElementById("Recommencer");
+boutonRecommencer.textContent = "Commencer";
     boutonRecommencer.addEventListener('click', () => {
         reinitialiserPartie();
         dessiner();
+        boutonRecommencer.textContent = "Recommencer";
     });
 // Gestion des touches clavier
 document.addEventListener('keydown', (e) => {
@@ -158,7 +160,7 @@ function verifierCollisionRaquette() {
 
 // Vérifie la défaite
 function verifierDefaite() {
-    if (ballY + ballRadius > canvas.height) {
+    if (ballY -(2* ballRadius) > canvas.height) {
         afficherDefaite();
         partieFinie = true;
         return true;
@@ -172,6 +174,7 @@ function reinitialiserPartie() {
     paddleY = canvas.height - paddleHeight - 10;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
+
     let angle = Math.random() * Math.PI / 2 + Math.PI / 4; 
     let vitesse = 3;
     ballSpeedX = vitesse * Math.cos(angle) * (Math.random() < 0.5 ? 1 : -1);
@@ -204,4 +207,4 @@ function dessiner() {
     if (!partieFinie && boutonRecommencer) requestAnimationFrame(dessiner);
 }
 
-dessiner();
+//dessiner();
