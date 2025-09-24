@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas'); // Récupère le canvas HTML
 const ctx = canvas.getContext('2d'); // Contexte 2D pour dessiner sur le canvas
 
 canvas.width = 350;   // Largeur du canvas (aire de jeu)
-canvas.height = 500;  // Hauteur du canvas (aire de jeu)
+canvas.height = 480;  // Hauteur du canvas (aire de jeu)
 
 // --- Raquette ---
 const paddleWidth = 100;    // Largeur de la raquette
@@ -64,7 +64,11 @@ document.querySelector('.fa-arrow-left').addEventListener('touchend', () => {
 document.querySelector('.fa-arrow-right').addEventListener('touchend', () => {
     droiteAppuyee = false;
 });
-
+const boutonRecommencer = document.getElementById("Recommencer");
+    boutonRecommencer.addEventListener('click', () => {
+        reinitialiserPartie();
+        dessiner();
+    });
 // Gestion des touches clavier
 document.addEventListener('keydown', (e) => {
    if (e.key === 'p' || e.key === 'P') {
@@ -79,7 +83,8 @@ document.addEventListener('keydown', (e) => {
     }
     if (e.key === 'ArrowLeft') gaucheAppuyee = true;
     if (e.key === 'ArrowRight') droiteAppuyee = true;
-
+    
+    
     if (partieFinie && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
         reinitialiserPartie();
         dessiner();
@@ -104,13 +109,13 @@ function afficherDefaite() {
 
 // Dessine la raquette
 function dessinerRaquette() {
-    ctx.fillStyle='orange';
+    ctx.fillStyle='white';
     ctx.fillRect(paddleX, paddleY, paddleWidth, paddleHeight);
 }
 
 // Dessine la balle
 function dessinerBalle() {
-    ctx.fillStyle='red';
+    ctx.fillStyle='white';
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
     ctx.fill();
@@ -196,7 +201,7 @@ function dessiner() {
 
     if (verifierDefaite()) return;
 
-    if (!partieFinie) requestAnimationFrame(dessiner);
+    if (!partieFinie && boutonRecommencer) requestAnimationFrame(dessiner);
 }
 
 dessiner();
