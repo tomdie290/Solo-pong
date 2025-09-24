@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 
 // Taille fixe
 canvas.width = 580;
-canvas.height = 800;
+canvas.height = 650;
 
 const paddleWidth = 200, paddleHeight = 10;
 let paddleX = canvas.width / 2 - paddleWidth / 2;
